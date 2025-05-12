@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoalPy - Documentação da API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+
+    header {
+      background-color: #1e293b;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #22c55e;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+    }
+
+    .section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .endpoint {
+      background-color: #1e293b;
+      border-left: 5px solid #22c55e;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+    }
+
+    .endpoint h3 {
+      margin-top: 0;
+      color: #38bdf8;
+    }
+
+    code,
+    pre {
+      background-color: #334155;
+      padding: 0.8rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      color: #f8fafc;
+      display: block;
+      overflow-x: auto;
+    }
+
+    .code-container {
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #22c55e;
+      border: none;
+      color: #0f172a;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><i class="fas fa-futbol"></i> GoalPy API</h1>
+    <p>API de dados de futebol construída com FastAPI</p>
+  </header>
+
+  <section class="section">
+    <h2>🔍 Sobre a API</h2>
+    <p>A GoalPy é uma API REST que fornece dados organizados sobre jogos, times, estatísticas, ligas e odds do futebol.</p>
+    <p>Base URL: <code>http://127.0.0.1:8000</code></p>
+  </section>
+
+  <section class="section">
+    <h2>🔐 Autenticação</h2>
+    <p>Você pode consumir a API diretamente do seu código Python. Aqui está um exemplo utilizando a biblioteca :</p>
+    <p><code>pip install requests</code></p>
+    <div class="endpoint">
+      <h3>Exemplo de código em Python</h3>
+      <div class="code-container">
+        <button class="copy-btn">📋 Copiar</button>
+        <pre><code>import requests
+
+# URLs da API
+BASE_URL = "http://127.0.0.1:8000"
+jogos_url = f"{BASE_URL}/jogos"
+
+# Token de acesso
+token = "token_gerado"
+headers = {"Authorization": f"Bearer {token}"}
+
+# Solicita dados protegidos usando o token
+jogos_response = requests.get(jogos_url, headers=headers)
+if jogos_response.status_code == 200:
+    print("Jogos:", jogos_response.json())
+else:
+    print("Falha ao obter jogos:", jogos_response.status_code)</code></pre>
+      </div>
+    </div>
+    <hr style="margin-top: 2rem; margin-bottom: 1rem; border: none; border-top: 1px solid #334155;">
+  </section>
+
+  <section class="section">
+    <h2>📌 Endpoints GET</h2>
+    <div class="endpoint">
+      <h3>GET /jogos</h3>
+      <p>Retorna uma lista de jogos. Necessita de autenticação.</p>
+      <code>Exemplo: http://127.0.0.1:8000/jogos</code>
+      <pre><code>{
+  "id": 1,
+  "data": "2025-05-10",
+  "time_casa": "Flamengo",
+  "time_fora": "Palmeiras",
+  "liga": "Brasileirão",
+  "status": "agendado"
+}</code></pre>
+    </div>
+    <div class="endpoint">
+      <h3>GET /times</h3>
+      <p>Retorna todos os times cadastrados. Necessita de autenticação.</p>
+      <code>Exemplo: http://127.0.0.1:8000/times</code>
+      <pre><code>{
+  "id": 1,
+  "nome": "Flamengo",
+  "pais": "Brasil"
+}</code></pre>
+    </div>
+    <div class="endpoint">
+      <h3>GET /ligas</h3>
+      <p>Retorna todas as ligas cadastradas. Necessita de autenticação.</p>
+      <code>Exemplo: http://127.0.0.1:8000/ligas</code>
+      <pre><code>{
+  "id": 1,
+  "nome": "Brasileirão",
+  "pais": "Brasil"
+}</code></pre>
+    </div>
+    <div class="endpoint">
+      <h3>GET /estatisticas</h3>
+      <p>Retorna estatísticas dos jogos. Necessita de autenticação.</p>
+      <code>Exemplo: http://127.0.0.1:8000/estatisticas</code>
+      <pre><code>{
+  "id": 1,
+  "jogo": 1,
+  "tempo_evento": "jogo_inteiro",
+  "gols_casa": 2,
+  "gols_fora": 1,
+  "escanteios_casa": 5,
+  "escanteios_fora": 3
+}</code></pre>
+    </div>
+    <div class="endpoint">
+      <h3>GET /odds</h3>
+      <p>Retorna as odds disponíveis por jogo. Necessita de autenticação.</p>
+      <code>Exemplo: http://127.0.0.1:8000/odds</code>
+      <pre><code>{
+  "id": 1,
+  "jogo": 1,
+  "casa_aposta": "Bet365",
+  "odd_1": 2.1,
+  "odd_x": 3.4,
+  "odd_2": 3.1,
+  "data_hora": "2025-05-10T15:30:00"
+}</code></pre>
+    </div>
+  </section>
+
+  <footer>
+    <p>Desenvolvido com ❤️ por Francisco Vito Júnior | Powered by FastAPI</p>
+  </footer>
+
+  <script>
+    document.querySelector('.copy-btn').addEventListener('click', () => {
+      const code = document.querySelector('.code-container pre code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerText = 'Copiado!';
+        setTimeout(() => btn.innerText = '📋 Copiar', 2000);
+      });
+    });
+  </script>
+</body>
+
+</html>

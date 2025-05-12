@@ -1,0 +1,32 @@
+# Ignore arquivos de ambiente
+.env
+
+# Ignore arquivos de banco de dados SQLite
+*.db
+*.sqlite3
+
+# Ignore arquivos Excel
+*.xlsx
+
+# Diretórios do Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Pastas comuns de ambiente virtual
+venv/
+env/
+.venv/
+.env/
+
+# Arquivos do editor
+.vscode/
+.idea/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Bytecode compilado
+*.pyc
